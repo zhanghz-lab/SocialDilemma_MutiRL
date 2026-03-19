@@ -25,7 +25,7 @@ if __name__ == '__main__':
         state_space = S8Encoder()
     else:
         raise ValueError(f"unknown encoder_type: {encoder_type}")
-    
+
     action_space = ActionSpace()  # 0=C, 1=D
     env = NetworkEnv(network_type, N=L * L, n_actions=action_space.n_actions(), L=L)
     state_space.on_reset(env)
