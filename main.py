@@ -7,7 +7,7 @@ from env.network_structure import NetworkEnv
 from utils.plot_tools import *
 
 if __name__ == '__main__':
-    if encoder_type == "NOR":
+    if encoder_type == "S8":
         state_space = NOREncoder()
     elif encoder_type == "SR":
         state_space = SREncoder()
