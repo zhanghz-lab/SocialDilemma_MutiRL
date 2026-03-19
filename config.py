@@ -20,7 +20,7 @@ tau = 1  # Bolzmann temperature Factor
 
 random_seed = 42
 network_type = "lattice"  # network type, can be replaced with BA, WS
-encoder_type = "NP"  # state representation, can be replaced with others
+encoder_type = "S4"  # state representation, can be replaced with others
 rl_type = "qlearning"  # reinforcement learning algorithms, can be replaced with SARSA.
 exploration_type = "boltzmann"  # explore mechanisms, can be replaced with boltzmann
 game_type = "PDG"  # game model, can be replaced with PGG
