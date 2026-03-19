@@ -7,25 +7,26 @@ from env.network_structure import NetworkEnv
 from utils.plot_tools import *
 
 if __name__ == '__main__':
-    if encoder_type == "S8":
-        state_space = NOREncoder()
-    elif encoder_type == "SR":
-        state_space = SREncoder()
-    elif encoder_type == "NR":
-        state_space = NREncoder()
-    elif encoder_type == "SNR":
-        state_space = SNREncoder()
-    elif encoder_type == "AM":
-        state_space = AMEncoder()
-    elif encoder_type == "SAM":
-        state_space = SAMEncoder()
-    elif encoder_type == "NP":
-        state_space = NPEncoder()
-    elif encoder_type == "SNP":
-        state_space =SNPEncoder()
+    if encoder_type == "S1":
+        state_space = S1Encoder()
+    elif encoder_type == "S2":
+        state_space = S2Encoder()
+    elif encoder_type == "S3":
+        state_space = S3Encoder()
+    elif encoder_type == "S4":
+        state_space = S4Encoder()
+    elif encoder_type == "S5":
+        state_space = S5Encoder()
+    elif encoder_type == "S6":
+        state_space = S6Encoder()
+    elif encoder_type == "S7":
+        state_space = S7Encoder()
+    elif encoder_type == "S8":
+        state_space = S8Encoder()
     else:
         raise ValueError(f"unknown encoder_type: {encoder_type}")
-    action_space = ActionSpace()#0=C, 1=D
+    
+    action_space = ActionSpace()  # 0=C, 1=D
     env = NetworkEnv(network_type, N=L * L, n_actions=action_space.n_actions(), L=L)
     state_space.on_reset(env)
     if rl_type == "qlearning":
@@ -50,16 +51,16 @@ if __name__ == '__main__':
                 s = state_space.encode(env, idx)
                 if encoder_type == "NOR":
                     reward = game_model.reward(env, idx, game_type, b)
-                    agent.update(s, env, idx, reward, encoder_type,exploration_type)
-                    action = agent.choose_action(s, idx,exploration_type)
+                    agent.update(s, env, idx, reward, encoder_type, exploration_type)
+                    action = agent.choose_action(s, idx, exploration_type)
                     env.actions[idx] = action
                 else:
                     idx = env.random_agent()
                     s = state_space.encode(env, idx)
-                    action = agent.choose_action(s, idx,exploration_type)
+                    action = agent.choose_action(s, idx, exploration_type)
                     env.actions[idx] = action
                     reward = game_model.reward(env, idx, game_type, b)
-                    agent.update(s, env, idx, reward, encoder_type,exploration_type)
+                    agent.update(s, env, idx, reward, encoder_type, exploration_type)
 
         np.savetxt(os.path.join(sim_dir, f"CountCooperators-sim{sim:04d}.csv"), cooperators_frac, fmt="%.6f",
                    delimiter=",")
